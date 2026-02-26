@@ -12,13 +12,14 @@
  *   - September, October, November (9, 10, 11)   → "Autumn"
  *
  * Step 2 — Suggest an activity based on season AND temperature (°C):
+ *
  *   - Winter + temp < 0     → "skiing"
  *   - Winter + temp >= 0    → "ice skating"
  *   - Spring + temp > 20    → "hiking"
  *   - Spring + temp <= 20   → "museum visit"
  *   - Summer + temp > 35    → "swimming"
  *   - Summer + temp <= 35   → "cycling"
- *   - Autumn + temp > 15    → "nature walk"
+ *   - Autumn + temp > 15    → "nature walk"3
  *   - Autumn + temp <= 15   → "reading at a cafe"
  *
  * Return an object: { season: string, activity: string }
@@ -31,5 +32,66 @@
  * @returns {{ season: string, activity: string } | null}
  */
 export function getSeasonActivity(month, temperature) {
+  if ( typeof month !== 'number' ||
+       typeof temperature !== 'number'||
+       month > 12 ||
+       month < 1
+  ){
+    return null;
+  }
+  let activity;
+  let season;
+
+  if (month === 1 || month === 2 || month === 12){
+    season = "Winter";
+  }
+  else if (month >= 3 && month <= 5){
+    season = "Spring";
+  }
+  else if(month >= 6 && month <= 8){
+    season = "Summer";
+  }
+  else {
+    season = "Autumn";
+  }
+
+  if (season === "Winter"){
+    if(temperature < 0){
+      activity = "skiing";
+    }
+    else{
+      activity = "ice skating";
+    }
+  }
+  else if(season === "Spring"){
+    if(temperature > 20){
+      activity = "hiking";
+    }
+    else{
+      activity = "museum visit";
+    }
+  }
+  else if (season === "Summer"){
+    if (temperature > 35){
+      activity = "swimming";
+    }
+    else{
+      activity = "cycling";
+    }
+  }
+  else{
+    if(temperature > 15){
+      activity = "nature walk";
+    }
+    else{
+      activity = "reading at a cafe";
+    }
+  }
+
+  return{
+    season,
+    activity
+  };
+
   // Your code here
 }
